@@ -6,19 +6,30 @@ import UserOptionsForm from "./UserOptionsForm";
 import GeneratedContentSection from "./GeneratedContentSection";
 
 function App() {
-  const [BafData, setBafData] = useState([]);
+  const [bafData, setBafData] = useState({});
+
+  const [friends, setFriends] = useState(5);
+
+  // const [funds, setFunds] = useState("");
+
   useEffect(() => {
     axios({
       url: "http://www.boredapi.com/api/activity",
       params: {
-        participants: 4,
+        participants: friends,
       },
     }).then((apiData) => {
       setBafData(apiData.data);
       console.log(apiData.data);
     });
-  }, []);
-  console.log(BafData.participants);
+  }, [friends]);
+
+  const selectNumberOfFriends = function (event, chosenFriends) {
+    event.preventDefault();
+    console.log(chosenFriends);
+    setFriends(chosenFriends);
+  };
+
   return (
     <div className="App">
       <header>
@@ -31,8 +42,8 @@ function App() {
           rem nam.
         </p>
       </header>
-      <UserOptionsForm />
-      <GeneratedContentSection />
+      <UserOptionsForm userSubmit={selectNumberOfFriends} />
+      <GeneratedContentSection generatedData={bafData} />
     </div>
   );
 }
