@@ -1,12 +1,12 @@
-// import axios from "axios";
-// import { useState, useEffect } from "react";
+// GeneratedContentSection.js
+
 import GeneratedResults from "./GeneratedResults";
+import GeneratedPicture from "./GeneratedPicture";
 
 function GeneratedContentSection(props) {
-  console.log(props);
   return (
-    <section className="generatedContent">
-      <h2>We've Cured your boredom!</h2>
+    <section className="generatedContentSection">
+      <h2>Huzzah! We've Cured your boredom!</h2>
 
       {props.generatedData ? (
         <GeneratedResults
@@ -16,17 +16,11 @@ function GeneratedContentSection(props) {
           price={props.generatedData.price}
         />
       ) : null}
-
-      {/* {props.generatedData((returnedObject) => {
-        return (
-          <GeneratedResults
-            activity={returnedObject.activity}
-            participants={returnedObject.participants}
-            // type={returnedObject.type}
-            price={returnedObject.price}
-          />
-        );
-      })} */}
+      <GeneratedPicture searchParam={props.generatedData.activity} />
+      <p>
+        Dont like the result? Click the button again! I know, its a struggle,
+        but it takes minimal effort.
+      </p>
     </section>
   );
 }

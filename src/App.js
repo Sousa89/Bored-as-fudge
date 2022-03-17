@@ -1,32 +1,34 @@
+// App.js
+
 import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
 import UserOptionsForm from "./UserOptionsForm";
 import GeneratedContentSection from "./GeneratedContentSection";
+import Footer from "./Footer";
 
 function App() {
   const [bafData, setBafData] = useState({});
 
-  const [friends, setFriends] = useState(5);
+  const [friends, setFriends] = useState(!true);
 
-  // const [funds, setFunds] = useState("");
-
+  // this recall function lets the user re-submit form, getting new data each time
+  const [recall, setRecall] = useState(true);
   useEffect(() => {
     axios({
-      url: "http://www.boredapi.com/api/activity",
+      url: "https://www.boredapi.com/api/activity",
       params: {
         participants: friends,
       },
     }).then((apiData) => {
       setBafData(apiData.data);
-      console.log(apiData.data);
     });
-  }, [friends]);
+  }, [recall]);
 
   const selectNumberOfFriends = function (event, chosenFriends) {
     event.preventDefault();
-    console.log(chosenFriends);
+    setRecall(!recall);
     setFriends(chosenFriends);
   };
 
@@ -34,16 +36,24 @@ function App() {
     <div className="App">
       <header>
         <h1>Bored As Fudge</h1>
-        <img src="http://placekitten.com/700/300" alt="" />
+        <div className="imgContainer">
+          <img src="https://unsplash.com/photos/avmHWOuRThM" alt="" />
+        </div>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut a
-          obcaecati debitis iure amet, non quo sunt, voluptas ipsa repudiandae
-          culpa. Harum, similique repellendus. Laudantium ipsa provident veniam
-          rem nam.
+          Look at you sitting there. You haven't moved in 3 hours, have you?
+          Probably distracting yourself with cute cat pictures, or thinking
+          about how terrifyingly vast the universe is.
         </p>
+        <p>You must be Bored, As, Fudge.</p>
+
+        <p>Let us fix that for you! </p>
       </header>
       <UserOptionsForm userSubmit={selectNumberOfFriends} />
-      <GeneratedContentSection generatedData={bafData} />
+      {/* this ternary operators prevents generated section from displaying before user clicks on submit button (on app start, a random option is rendered) */}
+      {friends === false ? null : (
+        <GeneratedContentSection generatedData={bafData} />
+      )}
+      <Footer />
     </div>
   );
 }
