@@ -25,7 +25,7 @@ function App() {
     }).then((apiData) => {
       setBafData(apiData.data);
     });
-  }, [recall]);
+  }, [recall, friends]);
 
   const selectNumberOfFriends = function (event, chosenFriends) {
     event.preventDefault();
@@ -39,7 +39,7 @@ function App() {
       <div className="wrapper">
         <header>
           <div className="imgContainer">
-            <img src={YawningGirl} alt="image of girl yawning" />
+            <img src={YawningGirl} alt="girl yawning" />
           </div>
         </header>
         <section className="intro">
