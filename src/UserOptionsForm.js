@@ -28,9 +28,7 @@ function UserOptionsForm(props) {
           <option value="5">Five</option>
         </select>
 
-        <button>
-          Free me from the clutches of existential dread due to boredom!
-        </button>
+        <button>Free me from the clutches of existential dread!</button>
       </form>
       {console.log(`Hell, you must be REALLY bored if you're looking in here`)}
     </div>

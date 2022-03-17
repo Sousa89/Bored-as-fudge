@@ -15,7 +15,7 @@ function GeneratedImage(searchParam) {
         query: searchParam,
       },
     }).then((pictureData) => {
-      setFinalImage(pictureData.data.results[1].urls.small);
+      setFinalImage(pictureData.data.results[0].urls.small);
     });
   }, [searchParam]);
 
